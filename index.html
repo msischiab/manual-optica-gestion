@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Uso y Gestión Administrativa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Consulting Blue -->
+    <!-- Application Structure Plan: Diseño de base de conocimiento (SPA) con navegación lateral fija. Permite a los usuarios consultar rápidamente procedimientos específicos (Ventas, Stock, Facturación) sin desplazamiento vertical, mejorando la usabilidad del manual. La estructura divide el contenido en secciones lógicas (Excel, ErwinSys) y utiliza JS para mostrar/ocultar el contenido principal. -->
+    <!-- Visualization & Content Choices: Contenido del manual presentado en listas y tablas HTML. Interacción: Navegación dinámica (JS show/hide) para simular cambio de página. Se utilizan placeholders de imagen para ilustrar pantallas del software. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        .sidebar-link.active {
+            background-color: #e0f2fe; /* light-blue-100 */
+            color: #0c4a6e; /* sky-800 */
+            font-weight: 600;
+        }
+        .page-content {
+            display: none;
+        }
+        .page-content.active {
+            display: block;
+        }
+        /* Estilos para las teclas KBD y códigos */
+        kbd, code {
+            font-family: monospace;
+            padding: 2px 4px;
+            border-radius: 4px;
+            background-color: #f3f4f6; /* gray-100 */
+            border: 1px solid #e5e7eb; /* gray-200 */
+            font-size: 0.875rem; /* text-sm */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="flex h-screen">
+        <!-- Barra lateral de navegación (Índice) -->
+        <aside class="w-64 bg-white shadow-lg flex-shrink-0 h-full overflow-y-auto">
+            <div class="p-5 border-b sticky top-0 bg-white z-10">
+                <h1 class="text-xl font-bold text-gray-900">Manual de Gestión</h1>
+                <p class="text-sm text-gray-600">Óptica</p>
+            </div>
+            <nav class="p-4">
+                <h3 class="text-xs uppercase text-gray-500 font-semibold mb-2">Introducción</h3>
+                <ul>
+                    <li><a href="#inicio" class="sidebar-link active text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md py-2 px-3 block" data-target="page-inicio">Objetivo y Audiencia</a></li>
+                </ul>
+
+                <h3 class="text-xs uppercase text-gray-500 font-semibold mt-4 mb-2">Parte 1: Excel/Sheets</h3>
+                <ul>
+                    <li><a href="#excel-tools" class="sidebar-link text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md py-2 px-3 block" data-target="page-excel-tools">Listado de Herramientas</a></li>
+                    <li><a href="#stock-key" class="sidebar-link text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md py-2 px-3 block" data-target="page-stock-key">Stock Unificado: Clave</a></li>
+                    <li><a href="#proforma-proc" class="sidebar-link text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md py-2 px-3 block" data-target="page-proforma-proc">Proceso: Proforma</a></li>
+                </ul>
+
+                <h3 class="text-xs uppercase text-gray-500 font-semibold mt-4 mb-2">Parte 2: ErwinSys</h3>
+                <ul>
+                    <li><a href="#generar-presupuestos" class="sidebar-link text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md py-2 px-3 block" data-target="page-generar-presupuestos">Generar Presupuestos</a></li>
+                    <li><a href="#factura-vinculacion" class="sidebar-link text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md py-2 px-3 block" data-target="page-factura-vinculacion">Vincular Facturas (Paso a Paso)</a></li>
+                </ul>
+
+                <h3 class="text-xs uppercase text-gray-500 font-semibold mt-4 mb-2">Apéndices</h3>
+                <ul>
+                    <li><a href="#glosario" class="sidebar-link text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md py-2 px-3 block" data-target="page-glosario">Glosario</a></li>
+                    <li><a href="#atajos" class="sidebar-link text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-md py-2 px-3 block" data-target="page-atajos">Atajos Rápidos</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Área de contenido principal -->
+        <main class="flex-1 h-full overflow-y-auto">
+            <div class="p-8 md:p-12 max-w-4xl mx-auto">
+
+                <!-- Página de Inicio -->
+                <section id="page-inicio" class="page-content active">
+                    <div class="bg-white p-8 rounded-lg shadow-xl">
+                        <img src="https://placehold.co/300x80/000000/FFFFFF?text=AEYF+-+Creando+Soluciones" alt="Logo AEYF" class="mb-6 h-12">
+                        <h1 class="text-3xl font-bold text-gray-900 mb-4">MANUAL DE USO Y GESTIÓN ADMINISTRATIVA</h1>
+                        <p class="text-lg text-gray-600 mb-2">Óptica [Nombre del Cliente]</p>
+                        <span class="text-sm text-gray-500">AEYF - Creando Soluciones | Octubre 2025</span>
+
+                        <div class="mt-8 border-t pt-6">
+                            <h2 class="text-2xl font-semibold text-gray-800 mb-3">Objetivo del Manual</h2>
+                            <p class="text-gray-700 leading-relaxed">
+                                Este manual tiene como finalidad guiar al personal de la óptica en el uso correcto y eficiente de las <strong>Herramientas de Excel/Google Sheets</strong> y el <strong>Sistema ErwinSys</strong>.
+                            </p>
+                        </div>
+
+                        <div class="mt-6">
+                            <h2 class="text-2xl font-semibold text-gray-800 mb-3">Público Destinatario</h2>
+                            <p class="text-gray-700">
+                                Recepcionistas, vendedores, técnicos ópticos, personal administrativo y gerentes.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Página Listado de Herramientas (Excel) -->
+                <section id="page-excel-tools" class="page-content">
+                    <div class="bg-white p-8 rounded-lg shadow-xl">
+                        <h1 class="text-3xl font-bold text-gray-900 mb-6">PARTE 1: HERRAMIENTAS DE EXCEL/GOOGLE SHEETS</h1>
+
+                        <h2 class="text-2xl font-semibold text-gray-800 mb-4">1. Listado de Herramientas</h2>
+                        <p class="text-gray-700 mb-4">
+                            Estas planillas son la base de datos y herramientas clave para la gestión de productos, stock y proformas.
+                        </p>
+                        <div class="overflow-x-auto rounded-lg border">
+                            <table class="min-w-full bg-white">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Herramienta</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Descripción Principal</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <strong class="text-gray-900">Stock Unificado</strong>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            Planilla madre para lista de productos, precios, proformas y stock por sucursal (Morón).
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <strong class="text-gray-900">Pedidos LC</strong>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            Seguimiento específico de pedidos de lentes de contacto (Floresta).
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Página Estructura Stock Unificado -->
+                <section id="page-stock-key" class="page-content">
+                    <div class="bg-white p-8 rounded-lg shadow-xl">
+                        <h1 class="text-3xl font-bold text-gray-900 mb-6">2. Stock Unificado</h1>
+
+                        <h2 class="text-2xl font-semibold text-gray-800 mb-3">2.1. Estructura y Funcionalidades Clave</h2>
+                        <p class="text-gray-700 mb-4">
+                            Comprender estas solapas es esencial, ya que contienen las fórmulas y la base de precios del negocio.
+                        </p>
+                        <div class="overflow-x-auto rounded-lg border mb-6">
+                            <table class="min-w-full bg-white">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Solapa</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Propósito</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Funcionalidades Destacadas</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4"><strong class="text-gray-900">Proforma</strong></td>
+                                        <td class="px-6 py-4">Generación de proformas para la OOSS y su aprobación.</td>
+                                        <td class="px-6 py-4">Uso de <code>BUSCARV</code>, <code>Calendario desplegable</code> (doble click en B2), <code>Numbertext</code> (N65).</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4"><strong class="text-gray-900">Productos</strong></td>
+                                        <td class="px-6 py-4">Base de datos de artículos (ortopedia) y control de stock de Morón.</td>
+                                        <td class="px-6 py-4"><code>CONCATENAR</code> (código único producto-talle), <code>IFs</code> y <code>REDOND.MULT</code> para precios.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Página Procedimiento Proforma -->
+                <section id="page-proforma-proc" class="page-content">
+                    <div class="bg-white p-8 rounded-lg shadow-xl">
+                        <h1 class="text-3xl font-bold text-gray-900 mb-6">2.2. Procedimiento Paso a Paso: Proforma</h1>
+                        <p class="text-gray-700 mb-4">
+                            Pasos obligatorios para registrar una proforma y asegurar su correcto pase al registro de ventas.
+                        </p>
+
+                        <ol class="list-decimal list-inside space-y-4 text-gray-700 pl-4">
+                            <li>
+                                <strong>Completar Datos Generales (B2 a B14):</strong>
+                                <p class="ml-4 mt-1">Ingrese la información del cliente. Recuerde que la celda <kbd>B9</kbd> trae automáticamente la última proforma guardada en "Ventas Morón" (función <code>INDICE</code>).</p>
+                            </li>
+                            <li>
+                                <strong>Carga de Productos:</strong>
+                                <p class="ml-4 mt-1">Complete la <strong>cantidad</strong> (Col B) y el <strong>código/talle</strong> (Col G, H, I). Las columnas de precio y descripción se autocompletan.</p>
+                            </li>
+                            <li>
+                                <strong>Revisión e Impresión/Descarga (Rango K16:R69):</strong>
+                                <p class="ml-4 mt-1">Seleccione el rango <code>K16:R69</code>, presione <kbd>Ctrl + P</kbd>, cambie a "Celdas seleccionadas" y guarde como PDF para enviar a la OOSS.</p>
+                            </li>
+                            <li>
+                                <strong>Copiado a Ventas (CRÍTICO):</strong>
+                                <p class="ml-4 mt-1">Copie el listado de ventas generado automáticamente (Col T:AI) <strong>sin los títulos</strong>. Luego, pegue <strong>solo a valores</strong> (<kbd>Ctrl + Shift + V</kbd>) en la solapa "Ventas Morón".</p>
+                            </li>
+                        </ol>
+                    </div>
+                </section>
+
+                <!-- Página Generar Presupuestos (ErwinSys) -->
+                <section id="page-generar-presupuestos" class="page-content">
+                    <div class="bg-white p-8 rounded-lg shadow-xl">
+                        <h1 class="text-3xl font-bold text-gray-900 mb-6">3. Generación de Presupuestos (ErwinSys)</h1>
+
+                        <h2 class="text-2xl font-semibold text-gray-800 mb-3">Procedimiento</h2>
+                        <ol class="list-decimal list-inside space-y-4 text-gray-700 pl-4">
+                            <li>
+                                <strong>Acceso:</strong> Ingrese a **Ventas** > **Presupuestos** > **Generar**.
+                            </li>
+                            <li>
+                                <strong>Validación Previa:</strong> Asegúrese de que el Cliente (u Obra Social) y los productos necesarios estén previamente cargados en el sistema.
+                            </li>
+                            <li>
+                                <strong>Configurar Ítems:</strong> Indique la <strong>Cantidad</strong> y <strong>Observaciones</strong> por producto.
+                            </li>
+                            <li>
+                                <strong>Gestión de Stock:</strong>
+                                <blockquote class="border-l-4 border-yellow-500 bg-yellow-50 p-4 rounded-r-md my-2 text-yellow-800">
+                                    **CLAVE:** Marque la casilla **Stock** solo si el producto es de inventario habitual. Esto permite que el presupuesto se salde <strong class="font-medium">sin necesidad de vincular una factura de proveedor</strong>. Úselo con cautela para artículos especiales.
+                                </blockquote>
+                            </li>
+                        </ol>
+
+                        <div class="mt-6">
+                            
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Página Vincular Facturas (ErwinSys) -->
+                <section id="page-factura-vinculacion" class="page-content">
+                    <div class="bg-white p-8 rounded-lg shadow-xl">
+                        <h1 class="text-3xl font-bold text-gray-900 mb-6">4. Habilitación de Presupuestos para Vinculación de Facturas</h1>
+                        <p class="text-gray-700 mb-6">
+                            Este es el proceso crítico que asocia los costos de compra al presupuesto. Un error aquí puede generar inconsistencias en la contabilidad.
+                        </p>
+
+                        <div class="space-y-8">
+                            <div>
+                                <h2 class="text-2xl font-semibold text-gray-800 mb-3">Paso 1: Verificación del Estado del Presupuesto</h2>
+                                <p class="text-gray-700"><strong>Acción:</strong> Acceda a **Presupuestos > Estado** y localice el N°. de presupuesto.</p>
+                                <blockquote class="border-l-4 border-blue-500 bg-blue-50 p-4 rounded-r-md my-3 text-blue-800">
+                                    **Regla:** El presupuesto debe estar en estado **"Producción"** o **"Entregado"** para que se habilite la funcionalidad de vinculación. Si está "Vigente" (a la espera de OOSS), no lo permite.
+                                </blockquote>
+                            </div>
+
+                            <div class="border-t pt-6">
+                                <h2 class="text-2xl font-semibold text-gray-800 mb-3">Paso 2: Comprobación de la Configuración de Stock</h2>
+                                <p class="text-gray-700"><strong>Acción:</strong> Ingrese al detalle del presupuesto y revise el campo **"Stock"** para el artículo.</p>
+                                <blockquote class="border-l-4 border-red-500 bg-red-50 p-4 rounded-r-md my-3 text-red-800">
+                                    **Regla CRÍTICA:** Si el ítem **requiere factura de compra específica** (ej: un lente especial), **DEBE destildar la casilla "Stock"**. Si está tildada, el sistema bloqueará la vinculación.
+                                </blockquote>
+                            </div>
+
+                            <div class="border-t pt-6">
+                                <h2 class="text-2xl font-semibold text-gray-800 mb-3">Paso 3: Verificación de la Relación con el Proveedor</h2>
+                                <p class="text-gray-700"><strong>Acción:</strong> Verifique el proveedor asignado al artículo en el presupuesto (posando el cursor sobre el código).</p>
+                                <blockquote class="border-l-4 border-green-500 bg-green-50 p-4 rounded-r-md my-3 text-green-800">
+                                    **Regla:** El proveedor asignado por el sistema debe ser **idéntico** al proveedor de la factura. Si no coinciden, debe corregir la **"Tabla de Productos"** antes de intentar vincular.
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Página Glosario -->
+                <section id="page-glosario" class="page-content">
+                    <div class="bg-white p-8 rounded-lg shadow-xl">
+                        <h1 class="text-3xl font-bold text-gray-900 mb-6">5. Glosario</h1>
+                        <p class="text-gray-700 mb-4">
+                            Términos clave utilizados en la gestión administrativa y el sistema.
+                        </p>
+                        <div class="overflow-x-auto rounded-lg border">
+                            <table class="min-w-full bg-white">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Término</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Definición</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4"><strong class="text-gray-900">Presupuesto</strong></td>
+                                        <td class="px-6 py-4">Propuesta económica preliminar.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4"><strong class="text-gray-900">Venta</strong></td>
+                                        <td class="px-6 py-4">Cuando el cliente acepta el presupuesto.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4"><strong class="text-gray-900">Tratamientos Ópticos</strong></td>
+                                        <td class="px-6 py-4">Recubrimientos o modificaciones especiales del lente.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Página Atajos -->
+                <section id="page-atajos" class="page-content">
+                    <div class="bg-white p-8 rounded-lg shadow-xl">
+                        <h1 class="text-3xl font-bold text-gray-900 mb-6">6. Atajos Rápidos (ErwinSys)</h1>
+                        <div class="overflow-x-auto rounded-lg border">
+                            <table class="min-w-full bg-white">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Atajo</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Función</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4"><kbd class="px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg">Ctrl + K</kbd></td>
+                                        <td class="px-6 py-4">Buscar Cliente</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4"><kbd class="px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg">Alt + P</kbd></td>
+                                        <td class="px-6 py-4">Nuevo Presupuesto</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('.sidebar-link');
+            const pages = document.querySelectorAll('.page-content');
+
+            function handleLinkClick(e) {
+                e.preventDefault();
+
+                const targetId = e.currentTarget.getAttribute('data-target');
+
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                });
+
+                const targetPage = document.getElementById(targetId);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                }
+
+                links.forEach(link => {
+                    link.classList.remove('active');
+                });
+                e.currentTarget.classList.add('active');
+
+                window.location.hash = e.currentTarget.getAttribute('href').substring(1);
+            }
+
+            links.forEach(link => {
+                link.addEventListener('click', handleLinkClick);
+            });
+
+            // Inicialización de página basada en el hash
+            const initialHash = window.location.hash.substring(1);
+            let targetLink = document.querySelector(`.sidebar-link[href="#${initialHash}"]`);
+
+            if (targetLink) {
+                targetLink.click();
+            } else {
+                // Activa la página de inicio por defecto
+                document.querySelector('.sidebar-link[data-target="page-inicio"]').click();
+            }
+        });
+    </script>
+</body>
+</html>
