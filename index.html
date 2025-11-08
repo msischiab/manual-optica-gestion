@@ -45,9 +45,17 @@
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <div class="flex h-screen">
+    <div class="flex h-screen overflow-x-hidden"> <!-- Evitar overflow horizontal -->
         <!-- Barra Lateral de Navegación -->
-        <aside class="w-80 bg-black text-gray-300 flex flex-col h-full shadow-lg fixed">
+        <!--
+            - Añadido id="sidebar"
+            - Añadido z-30 (para estar sobre el overlay)
+            - Añadidas clases de transformación:
+                - Por defecto (móvil): -translate-x-full (oculto fuera de la pantalla a la izquierda)
+                - 'md:translate-x-0': En pantallas medianas y grandes, se posiciona en x-0 (visible)
+            - Añadido 'transition-transform ...' para la animación de deslizamiento
+        -->
+        <aside id="sidebar" class="w-80 bg-black text-gray-300 flex flex-col h-full shadow-lg fixed z-30 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
             <!-- Logo Header -->
             <div class="p-6 bg-black border-b border-gray-700">
                 <h1 class="text-white text-3xl font-bold text-center">AEYF</h1>
@@ -116,9 +124,38 @@
             </nav>
         </aside>
 
+        <!-- Overlay (para móvil, al abrir el menú) -->
+        <!--
+            - Se activa con JS
+            - 'md:hidden': Oculto en pantallas grandes
+            - 'z-20': Por debajo del sidebar (z-30) pero por encima del main
+        -->
+        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-20 hidden md:hidden"></div>
+
         <!-- Área de Contenido Principal -->
-        <main class="ml-80 flex-1 h-screen overflow-y-auto">
-            <div class="p-4 md:p-8 lg:p-12">
+        <!--
+            - 'md:ml-80': El margen izquierdo solo se aplica en pantallas medianas y grandes
+            - 'w-full': Asegura que en móvil ocupe todo el ancho
+            - 'flex flex-col': Para organizar el header móvil y el contenido
+        -->
+        <main class="w-full md:ml-80 flex-1 h-screen flex flex-col">
+            
+            <!-- Header para Móvil (con botón de hamburguesa) -->
+            <!--
+                - 'md:hidden': Solo visible en pantallas pequeñas (móvil)
+                - 'sticky top-0 z-10': Para que se mantenga visible al hacer scroll
+            -->
+            <header class="bg-white shadow-md p-4 md:hidden sticky top-0 z-10">
+                <button id="menu-toggle-btn" class="text-gray-700 hover:text-gray-900">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </header>
+
+            <!-- Contenedor del contenido principal (con scroll) -->
+            <!--
+                - 'flex-1 overflow-y-auto': Permite que esta área crezca y tenga scroll
+            -->
+            <div class="flex-1 overflow-y-auto p-4 md:p-8 lg:p-12">
                 <!-- Contenedor del contenido que se actualiza -->
                 <div id="content-display" class="bg-white p-6 md:p-10 rounded-lg shadow-xl min-h-[80vh]">
                     <!-- El contenido se cargará aquí -->
@@ -1004,6 +1041,30 @@
         const sidebarNav = document.getElementById('sidebar-nav');
         const allModuleToggles = sidebarNav.querySelectorAll('.nav-toggle'); // Obtenemos todos los botones principales
         
+        // --- Nuevos elementos para responsividad ---
+        const sidebar = document.getElementById('sidebar');
+        const menuToggleBtn = document.getElementById('menu-toggle-btn');
+        const overlay = document.getElementById('overlay');
+
+        // --- Funciones para abrir/cerrar menú móvil ---
+        function openMobileMenu() {
+            if (sidebar) sidebar.classList.remove('-translate-x-full');
+            if (overlay) overlay.classList.remove('hidden');
+        }
+
+        function closeMobileMenu() {
+            if (sidebar) sidebar.classList.add('-translate-x-full');
+            if (overlay) overlay.classList.add('hidden');
+        }
+
+        // --- Event Listeners para menú móvil ---
+        if (menuToggleBtn) {
+            menuToggleBtn.addEventListener('click', openMobileMenu);
+        }
+        if (overlay) {
+            overlay.addEventListener('click', closeMobileMenu);
+        }
+        
         // Función para mostrar el contenido
         function showContent(pageId, clickedElement) {
             // Actualizar el contenido principal
@@ -1035,6 +1096,12 @@
                     parentModuleButton.classList.add('active-module');
                 }
             }
+
+            // --- Añadido para responsividad ---
+            // Si estamos en móvil (pantalla < 768px), cerramos el menú
+            if (window.innerWidth < 768) {
+                closeMobileMenu();
+            }
         }
 
         // Lógica para los menús desplegables (toggles)
@@ -1062,11 +1129,18 @@
         // Abrir el primer menú desplegable por defecto
         const firstToggle = document.querySelector('#nav-intro').previousElementSibling;
         if (firstToggle) {
-            firstToggle.click();
+            // Modificado para no simular click, solo abrir
+            const targetId = firstToggle.dataset.target;
+            const targetElement = document.getElementById(targetId);
+            const arrowIcon = firstToggle.querySelector('svg');
+            
+            if (targetElement && arrowIcon) {
+                targetElement.classList.remove('hidden');
+                arrowIcon.classList.add('rotate-180');
+            }
         }
 
     </script>
 
 </body>
 </html>
-
